@@ -1,1 +1,67 @@
-# Security-RISC
+# Artifacts for A Security RISC
+This repository contains the artifacts for the IEEE S&P 2023 paper "A Security RISC: Microarchitectural Attacks on Hardware RISC-V CPUs". You can find the paper at the [CISPA website](https://cispa.de/en/research/publications/3924-a-security-risc-microarchitectural-attacks-on-hardware-risc-v-cpus).
+
+## Supported Processors and Distributions
+Currently the experiments are tested on both the Alwinner C906 and SiFive U74 processors. 
+You can find implementations specifc to each of the two processors in the `./C906` and `./u74` subfolders. 
+Software specifications from our paper:
+```
+Both boards U74 run Debian 12 with
+kernel 5.14.0-rc4-nezha (Nezha) and 5.4.61 (Lichee RV).
+To evaluate the U74, we use the StarFive VisionFive board.
+The U74 implements the rv64gc instruction set extension
+and contains 8 GB of main memory. The VisionFive board
+runs Ubuntu 22.04.1 LTS with the 5.17.5-visionfive kernel.
+```
+
+## Utils
+We provide a `riscsc.h` header file that bundles a few useful instructions for all experiments.
+To use the header simply add `#include 'riscsc.h'` to your code afer copying the header on your path. 
+
+## Materials
+Each subfolder contains a readme on how to run the spcific experiment. We provive source code for the following experiments: 
+### Case Studies
+- `access-retired`: Discovers hidden files on a system by monitoring the ammount of retired instructions. This code is used during the Dropbox case study. +
+- `zigzagger`: Code for the zigzagger case study showing that it is possible to distinguish the branch direction of zigzaggger protected code via the count of retired instructions. +
+- `aes_example`: Contains the code for all AES T-Table attacks performed. +
+- `interrupt-timing`, `timer-drift`: Shows that it is possible to monitor network interrupts via timing. Also shows that a more precise result is possible using CycleDrift. +
+- `page-walk`: Shows timing (and on the U74 instruction differences) that allow to distinguish the lenght of the page table walk. + 
+
+### Histogram Code 
+- `evict_reload_histrogram`: Generates a histrogramm for an evict and reload covert channel +
+- `fence_flush_histogram`: Generates a histrogramm for an Flush+Reload attack on the I-Cache using the `fence.i` instruction. + 
+- `fgprime_probe_histrogram`: Optimized Prime+Probe for the C906 making use of the FIFO relacement strategy to achive highter transfer rates. +
+- `iflush_reload_histogram`: Generates a Flush+Reload histogramm using the `icache.iva` instruction on the C906. +
+- `flush_reload_histogram`: Generates a Flush+Reload histogramm using the `dcache.iva` instruction on the C906. +
+- `flush_flush_histogram`: Generates a Flush+Flush histogramm using the `dcache.iva` instruction on the C906. +
+- `prime_probe_histogram`: Histrogramm for a Prime+Probe attack. +
+- `tlb_evict_histogram`: Code to genereate a histogramm showing that it is possible to evict TLB entries. + 
+- `spectre-v1`: Histogramm that shows that code is spculatively fetched, enabling our Cache+Time attack. +
+
+### Benchmarks
+- `timer-evaluation`: Benchmark for the precision and increment behavior of the timers present on the tested processors. +
+-  `instr-cycles`: Shows the timing of most base set instructions + 
+
+### Misc
+- `square-multiply`: Padded square and multiply implementation that is still vulnerable to an attacker that can see the number of retired instructions. +
+- `m-mode-instr-count`: Shows that the `rdinstret` instruction leaks the number of exeuted instructions in M-mode. +
+
+## Citing Paper and Artifcats
+If you use our results in your research please cite our paper as:
+```
+@inproceedings{Gerlach2023SecurityRISC,
+ author = {Gerlach, Lukas and Weber, Daniel and Zhang, Ruiyi and Schwarz, Michael},
+ booktitle = {IEEE S&P},
+ title = {{A Security RISC: Microarchitectural Attacks on Hardware RISC-V CPUs}},
+ year = {2023}
+}
+```
+And our artifacts as:
+```
+@misc{Gerlach2023SecurityRISCartifacts,
+ author = {Gerlach, Lukas and Weber, Daniel and Zhang, Ruiyi and Schwarz, Michael},
+ url = {https://github.com/cispa/Security-RISC}
+ title = {{A Security RISC: Microarchitectural Attacks on Hardware RISC-V CPUs Artifact Repository}},
+ year = {2021}
+}
+```
