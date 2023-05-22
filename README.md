@@ -39,6 +39,7 @@ Each subfolder contains a readme on how to run the spcific experiment. We proviv
 ### Misc
 - `square-multiply`: Padded square and multiply implementation that is still vulnerable to an attacker that can see the number of retired instructions. 
 - `m-mode-instr-count`: Shows that the `rdinstret` instruction leaks the number of exeuted instructions in M-mode. 
+- `flush-fault`: PoC implementations for both variants of Fault+Fault.
 
 ## Citing Paper and Artifcats
 If you use our results in your research please cite our paper as:
