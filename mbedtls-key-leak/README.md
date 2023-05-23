@@ -24,11 +24,11 @@ local> scp ./attack_offsets.h lab-machine:~/mbedtls-key-leakage/
 lab-machine> python3 build.py
 
 # get the attack traces
-lab-machine> sudo python3 ./riscv/evaluate-attack.py get-leakage
+lab-machine> sudo python3 ./evaluate-attack.py get-leakage
 
 # postprocess them locally to read the key
 local> scp lab-machine:~/risc-attack-eval risc-attack-eval/
-local> python3 ./riscv/evaluate-attack post-process <THRESHOLD>
+local> python3 ./evaluate-attack post-process <THRESHOLD>
 ```
 
 ## Choosing the right threshold
