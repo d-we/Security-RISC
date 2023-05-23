@@ -10,7 +10,7 @@ Software specifications from our paper:
 
 ## Utils
 We provide a `riscsc.h` header file that bundles a few useful instructions for all experiments.
-To use the header, simply add `#include 'riscsc.h'` to your code, after copying the header to your path. 
+To use the header, simply add `#include "riscsc.h"` to your code, after copying the header to your path. 
 
 ## Materials
 Each subfolder contains a README on how to run the specific experiment. We provide source code for the following experiments: 
